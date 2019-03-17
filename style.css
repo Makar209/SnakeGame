@@ -25,7 +25,7 @@ body{
     display: flex;
     width: 80%;
     height: 80%;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .row{
@@ -38,4 +38,5 @@ body{
     display: flex;
     flex: 1;
     border: 1px solid black; 
+    margin: 3px;
 }
