@@ -69,7 +69,6 @@ function colorSnake(indexes) {
     }
 
 
-
     var cells = document.getElementsByClassName("cell");
     var headIndex = indexes[indexes.length - 1];
     cells[headIndex].classList.add("snake-head");
