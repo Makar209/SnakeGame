@@ -3,6 +3,11 @@ var upArrow = 38;
 var rightArrow = 39;
 var downArrow = 40;
 
+var snakePartDirections = {
+    // key: value, где key - это индекс части змеии, а value это направление движения этого куска змеии.
+    
+};
+
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
     rand = Math.round(rand);
@@ -43,24 +48,28 @@ function setSnake(indexFood) {
         idnexTail = headIndex - 17;
     }
     colorSnake([idnexTail, headIndex]);
+    snakePartDirections[idnexTail] = 1;
+    snakePartDirections[headIndex] = 1;
 }
 
+
+
 function moveSnake() {
+    var prevDirectionHead;
     setInterval(() => {
-        var cells = document.getElementsByClassName("cell");
-        cells = Array.from(cells);
-        var headSnake = document.getElementsByClassName("snake-head")[0];
-        var bodySnakes = Array.from(document.getElementsByClassName("snake-body"));
-        var headSnakeIndex = cells.findIndex((cell) => cell === headSnake) + 1;
-        var bodySnakeIndexes = [];
+        var cells = Array.from(document.getElementsByClassName("cell"));
+        var bodies = Array.from(document.getElementsByClassName("snake-body"));
+        var headIndex = getHeadIndex();
+        var bodyIndexes = [];
+
         for (var i = 0; i < cells.length; i++) {
-            if (bodySnakes.includes(cells[i])) {
-                bodySnakeIndexes.push(i + 1);
+            if (bodies.includes(cells[i])) {
+                bodyIndexes.push(i + snakePartDirections[i]);
             }
         }
-        colorSnake([...bodySnakeIndexes, headSnakeIndex]);
+        colorSnake([...bodyIndexes, headIndex + snakePartDirections[headIndex] ]);
+        prevDirectionHead = snakePartDirections[headIndex];
     }, 500);
-
 }
 
 function colorSnake(indexes) {
@@ -84,23 +93,31 @@ function colorSnake(indexes) {
 }
 
 document.addEventListener("keydown", function (event) {
+    var headIndex = getHeadIndex();
+    var direction = 1;
     switch (event.keyCode) {
         case leftArrow:
+            direction = -1; 
+            break;
+        case upArrow:
+            direction = -17; 
             
             break;
-        case upArrow:
-
-            break;
-        case upArrow:
-
-            break;
         case rightArrow:
-
+            direction = 1; 
             break;
         case downArrow:
-
-            break;
-        default:
+            direction = 17; 
             break;
     }
+
+    snakePartDirections[headIndex] = direction;
 })
+
+
+function getHeadIndex() {
+    var cells = Array.from(document.getElementsByClassName("cell"));
+    var headSnake = document.getElementsByClassName("snake-head")[0];
+    var headSnakeIndex = cells.findIndex((cell) => cell === headSnake);
+    return headSnakeIndex;
+}
