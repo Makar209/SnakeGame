@@ -44,17 +44,17 @@ function moveSnake() {
     setInterval(() => {
         var cells = document.getElementsByClassName("cell");
         cells = Array.from(cells);
-        var headSnake = document.getElementsByClassName("snake-head")[0] + 1;
-        var bodySnakes = document.getElementsByClassName("snake-body");
-        var headSnakeIndex = cells.findIndex((cell) => cell === headSnake);
+        var headSnake = document.getElementsByClassName("snake-head")[0];
+        var bodySnakes = Array.from(document.getElementsByClassName("snake-body"));
+        var headSnakeIndex = cells.findIndex((cell) => cell === headSnake) + 1;
         var bodySnakeIndexes = [];
         for (var i = 0; i < cells.length; i++) {
-            if (cells[i] === headSnake) {
+            if (bodySnakes.includes(cells[i])) {
                 bodySnakeIndexes.push(i + 1);
             }
         }
-        colorSnake([...bodySnakeIndexes, headSnake]);
-    }, 2000);
+        colorSnake([...bodySnakeIndexes, headSnakeIndex]);
+    }, 500);
 
 }
 
