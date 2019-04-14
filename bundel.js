@@ -84,5 +84,23 @@ function colorSnake(indexes) {
 }
 
 document.addEventListener("keydown", function (event) {
-    
+    switch (event.keyCode) {
+        case leftArrow:
+            
+            break;
+        case upArrow:
+
+            break;
+        case upArrow:
+
+            break;
+        case rightArrow:
+
+            break;
+        case downArrow:
+
+            break;
+        default:
+            break;
+    }
 })
