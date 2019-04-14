@@ -1,3 +1,8 @@
+var leftArrow = 37;
+var upArrow = 38;
+var rightArrow = 39;
+var downArrow = 40;
+
 function randomInteger(min, max) {
     var rand = min - 0.5 + Math.random() * (max - min + 1)
     rand = Math.round(rand);
@@ -64,7 +69,7 @@ function colorSnake(indexes) {
     if (headSnake != null) {
         headSnake.classList.remove("snake-head");
     }
-    for(var i = 0; i < bodySnakes.length; i++){
+    for (var i = 0; i < bodySnakes.length; i++) {
         bodySnakes[i].classList.remove("snake-body");
     }
 
@@ -72,8 +77,12 @@ function colorSnake(indexes) {
     var cells = document.getElementsByClassName("cell");
     var headIndex = indexes[indexes.length - 1];
     cells[headIndex].classList.add("snake-head");
-    for(var i = 0; i < indexes.length - 1; i++){
-        var cell = cells[indexes[i]]; 
+    for (var i = 0; i < indexes.length - 1; i++) {
+        var cell = cells[indexes[i]];
         cell.classList.add("snake-body");
     }
 }
+
+document.addEventListener("keydown", function (event) {
+    
+})
